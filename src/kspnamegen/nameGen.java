@@ -110,43 +110,73 @@ public class nameGen {
         Scanner scanner = new Scanner(System.in);
         boolean bool = random.nextInt(20)==0;
         String nameGenParams = null;
-        System.out.println("Specify gender for generated names.");
-        System.out.println("Type 'f' for female, and 'm' for male.");
-        System.out.println("Type 'exit' to exit.");
+        System.out.println("Specify types of name to generate.");
+        System.out.println("Type 'f' for Future-style names, and 's' for standard names.");
+        System.out.println("Type 'help' for help, or type 'exit' to exit.");
         String inputStr = scanner.nextLine().toLowerCase();
         switch (inputStr) {
             case "exit":    System.out.println("Exiting...");
                             Thread.sleep(2000);
                             System.exit(0);
                             break;
+            case "help":    helpPage.main(args);
+                            break;
             case "f":       nameGenParams = "f";
                             break;
-            case "m":       nameGenParams = "m";
+            case "s":       nameGenParams = "s";
                             break;
-            default:        System.out.println("Specified gender is not valid.");
+            default:        System.out.println("Specified type is not valid.");
                             nameGen.main(args);
                             break;
         }
-        System.out.println("Specify types of name to generate.");
-        System.out.println("Type 'f' for Future-style names, and 's' for standard names.");
-        System.out.println("Type 'help' for help.");
+        System.out.println("Specify if you want to generate:"
+                + "\na combination of both constructed and proper names (type [r]),"
+                + "\nconstructed names only (type [c])"
+                + "\nor proper names only [p].");
+        System.out.println("Note: this option does not apply to Future-style names."
+                + "\nIf you are planning to generate Future-style names, simply hit return.");
+        System.out.println("Type 'help' for help, or type 'exit' to exit.");
         String inputStr2 = scanner.nextLine().toLowerCase();
+        if ("f".equals(nameGenParams)) {
+            inputStr2 = "";
+        }
         switch (inputStr2) {
+            case "exit":    System.out.println("Exiting...");
+                            Thread.sleep(2000);
+                            System.exit(0);
+                            break;
             case "help":    helpPage.main(args);
                             break;
+            case "":        break;
+            case "r":       nameGenParams = "sr";
+            case "c":       nameGenParams = "sc";
+            case "p":       nameGenParams = "sp";
+        }
+        System.out.println("Specify gender for generated names.");
+        System.out.println("Type 'f' for female, and 'm' for male.");
+        String inputStr3 = scanner.nextLine().toLowerCase();
+        switch (inputStr3) {
             case "f":       if ("f".equals(nameGenParams)) {
                                 nameGenParams = "ff";
-                            } else if ("m".equals(nameGenParams)) {
-                                nameGenParams = "mf";
+                            } else if ("sr".equals(nameGenParams)) {
+                                nameGenParams = "srf";
+                            } else if ("sc".equals(nameGenParams)) {
+                                nameGenParams = "scf";
+                            } else if ("sp".equals(nameGenParams)) {
+                                nameGenParams = "spf";
                             }
                             break;
-            case "s":       if ("f".equals(nameGenParams)) {
-                                nameGenParams = "fs";
-                            } else if ("m".equals(nameGenParams)) {
-                                nameGenParams = "ms";
+            case "m":       if ("f".equals(nameGenParams)) {
+                                nameGenParams = "fm";
+                            } else if ("sr".equals(nameGenParams)) {
+                                nameGenParams = "srm";
+                            } else if ("sc".equals(nameGenParams)) {
+                                nameGenParams = "scm";
+                            } else if ("sp".equals(nameGenParams)) {
+                                nameGenParams = "spm";
                             }
                             break;
-            default:        System.out.println("Specified type is not valid.");
+            default:        System.out.println("Specified gender is not valid.");
                             nameGen.main(args);
                             break;
         }
@@ -170,13 +200,13 @@ public class nameGen {
                             System.out.println("Name generation successful.");
                             nameGenLoop.main(args);
                             break;
-            case "mf":      for (int i=0; i<inputInt; i++) {
+            case "fm":      for (int i=0; i<inputInt; i++) {
                                 System.out.println(mpr[random.nextInt(mpr.length)] + " " + mcp[random.nextInt(mcp.length)] + mcs[random.nextInt(mcs.length)]);
                             }
                             System.out.println("Name generation successful.");
                             nameGenLoop.main(args);
                             break;
-            case "fs":      for (int i=0; i<inputInt; i++) {
+            case "srf":     for (int i=0; i<inputInt; i++) {
                                 if (bool) {
                                     System.out.println(fpr[random.nextInt(fpr.length)] + " Kerman");
                                 } else {
@@ -186,7 +216,7 @@ public class nameGen {
                             System.out.println("Name generation successful.");
                             nameGenLoop.main(args);
                             break;
-            case "ms":      for (int i=0; i<inputInt; i++) {
+            case "srm":     for (int i=0; i<inputInt; i++) {
                                 if (bool) {
                                     System.out.println(mpr[random.nextInt(mpr.length)] + " Kerman");
                                 } else {
@@ -195,6 +225,22 @@ public class nameGen {
                             }
                             System.out.println("Name generation successful.");
                             nameGenLoop.main(args);
+                            break;
+            case "scf":     for (int i=0; i<inputInt; i++) {
+                            System.out.println(fpr[random.nextInt(fpr.length)] + " Kerman");
+                            }
+                            break;
+            case "scm":     for (int i=0; i<inputInt; i++) {
+                            System.out.println(mcp[random.nextInt(fcp.length)] + mcs[random.nextInt(fcs.length)] + " Kerman");
+                            }
+                            break;
+            case "spf":     for (int i=0; i<inputInt; i++) {
+                            System.out.println(fpr[random.nextInt(fpr.length)] + " Kerman");
+                            }
+                            break;
+            case "spm":     for (int i=0; i<inputInt; i++) {
+                            System.out.println(mpr[random.nextInt(mpr.length)] + " Kerman");
+                            }
                             break;
             default:        System.out.println("Specified type is not valid.");
                             nameGen.main(args);
