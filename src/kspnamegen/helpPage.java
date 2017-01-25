@@ -30,9 +30,7 @@ public class helpPage {
                 + "\nFuture-style name: proper first name + constructed last name");
         System.out.println("Constructed names vs proper names:"
                 + "\nConstructed name: random prefix + random suffix"
-                + "\nProper name: chosen from a list");
-        nameGen.main(args);
-        
+                + "\nProper name: chosen from a list");        
     }
     
 }
