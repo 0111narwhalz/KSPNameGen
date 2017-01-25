@@ -142,7 +142,7 @@ public class nameGen {
         }
 
         if ("f".equals(nameGenParams)) { // if the selected type is Future
-          break; // then just skip this
+          // do nothing
         } else { // else; more selection
           System.out.println("Specify if you want to generate:"
                   + "\na combination of both constructed and proper names (type [r]),"
