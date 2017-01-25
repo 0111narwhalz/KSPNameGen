@@ -103,6 +103,21 @@ class Unified
         "Tom", "Will"
     };
     
+    static enum index {
+        TYPE, CMBO, GNDR
+    }
+    static String[] prompts = { // cache all the prompts
+        /*TYPE*/"Specify types of names to generate.\n" +
+                "Type 'f' for Future-style names or 's' for standard names.\n",
+        /*CMBO*/"Specify if you want to generate:\n" +
+                " r: a combination of constructed and proper names\n" +
+                " c: constructed names only\n" +
+                " p: proper names only",
+        /*GNDR*/"Specify gender of generated names.\n" +
+                "'m' for male, 'f' for female"
+    };
+        
+    
     //Other static var defs
     static Scanner scan = new Scanner(System.in);
     static Random rand = new Random();
@@ -117,8 +132,7 @@ class Unified
             {
                 nameGen();
             }
-            System.out.println("Would you like to generate more names? Y/N");
-            input = scan.nextLine().toLowerCase();
+            input = Prompt("Would you like to generate more names? Y/N", false);
             switch(input)
             {
                 case "y":
@@ -131,6 +145,55 @@ class Unified
                     System.out.println("Invalid response.");
                     gen = false;
                     break;
-                    
-            
-            
+            }
+        }
+    }
+    
+    static void Kill()
+    {
+        System.out.print("Exiting");
+        for(int i = 0; i < 3; i++)
+        {
+            Thread.sleep(250);
+            System.out.print(".");
+        }
+        System.Exit(0);
+    }
+    
+    static void nameGen()
+    {
+        nameGen("TYPE");
+    }
+    
+    static void nameGen(String inpar)
+    {
+        String input;
+        String param;
+        boolean toggle;
+        
+        input = Prompt(prompt[index.TYPE]);
+        switch(input)
+        {
+            case exit:
+                Kill();
+                break;
+            case f:
+                param = "f";
+                inpar = "CMBO";
+                break;
+            case s:
+                param = "s";
+                inpar = "CMBO";
+                break;
+            default
+    }
+    
+    static String Prompt(String query, boolean help)
+    {
+        System.out.println(query);
+        if(help)
+        {
+            System.out.println("Type 'help' for help; 'exit' to exit.");
+        }
+        return scan.nextLine().toLowerCase();
+    }
