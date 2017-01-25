@@ -27,8 +27,7 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
 
         System.out.println("KSPNameGen ver. 1.0.0-rc2");
-        nameGen.main(args);
-
+        Unified.Loop();
    }
 
 }
