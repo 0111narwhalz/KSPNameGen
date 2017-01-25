@@ -24,7 +24,7 @@ package kspnamegen;
 
 public class helpPage {
 
-    static void main(String[] args) throws InterruptedException {
+    static void main() throws InterruptedException {
         System.out.println("Types of names:"
                 + "\nStandard name: first name + Kerman"
                 + "\nFuture-style name: proper first name + constructed last name");
