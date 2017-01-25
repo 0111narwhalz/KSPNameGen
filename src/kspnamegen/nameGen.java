@@ -27,90 +27,90 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class nameGen {
+    
+     // array defs
 
-    static void main(String[] args) throws InterruptedException {
+    static String[] fcp = {    // female constructed prefix
+        "Aga", "Al", "An", "Ar", "As", "Bar", "Bea", "Ber", "Car", "Cat",
+        "Cer", "Clau", "Cris", "Da", "Dan", "Daph", "De", "Deb", "Di", "Eil",
+        "Eli", "Eri", "Fran", "Gem", "Ger", "Gi", "Gil", "Gle", "Gra", "Gwen",
+        "Hai", "Hay", "Hel", "Hil", "Ir", "Isa", "Ja", "Jan", "Jen", "Jes",
+        "Jo", "Jul", "Ka", "Kar", "Kat", "Kath", "Ker", "Kim", "La", "Lager",
+        "Le", "Lea", "Lee", "Lin", "Lis", "Liz", "Lu", "Ma", "Mad", "Mag",
+        "Mar", "Mau", "Max", "Meg", "Mel", "Mi", "Mia", "Mil", "Mir", "Mo",
+        "Na", "Nata", "Ne", "Pa", "Pho", "Ra", "Ro", "Ros", "Sam", "San",
+        "Si", "Sie", "Sig", "Sta", "Stel", "Su", "Tam", "Tan", "Te", "Ti",
+        "Tra", "Tri", "Ur", "Val", "Ver", "Vir", "Wen", "Wil", "Zel"
+    };
 
-        // array defs
+    static String[] fcs = {    // female constructed suffix
+        "a", "alla", "an", "anda", "anna", "anne", "ayne", "be", "bel",
+        "bella", "belle", "berta", "beth", "bie", "by", "ca", "cee", "cella",
+        "chel", "chell", "chelle", "cia", "cie", "cine", "cy", "da", "di",
+        "dia", "die", "dine", "dolin", "dra", "drien", "e", "edith", "ee",
+        "ela", "ella", "elle", "elyn", "emma", "ena", "ene", "enna", "erta",
+        "et", "ette", "gee", "gela", "gie", "grid", "gy", "i", "iana", "ica",
+        "icca", "ice", "ie", "iel", "iella", "igh", "in", "ina", "ine",
+        "inne", "is", "isa", "ise", "issa", "jorie", "ke", "la", "lee",
+        "lenna", "lian", "liana", "lie", "lin", "lina", "line", "linne",
+        "lla", "llian", "lotte", "ly", "lyn", "ma", "mie", "mma", "my", "na",
+        "na", "nda", "ne", "nica", "nie", "nna", "nne", "ny", "otte", "phe",
+        "phia", "phie", "ra", "re", "ree", "righ", "rina", "rine", "ris",
+        "rix", "rude", "ry", "rys", "sa", "san", "sei", "selle", "sha", "sie",
+        "sy", "t", "ta", "te", "tha", "this", "thy", "ti", "tina", "tine",
+        "trice", "trid", "tris", "trix", "trude", "tte", "ty", "uki", "ula",
+        "una", "vie", "vy", "xie", "xy", "y", "ya", "yin", "yn", "yne", "ys",
+        "zie", "zy"
+    };
 
-        String[] fcp = {    // female constructed prefix
-            "Aga", "Al", "An", "Ar", "As", "Bar", "Bea", "Ber", "Car", "Cat",
-            "Cer", "Clau", "Cris", "Da", "Dan", "Daph", "De", "Deb", "Di", "Eil",
-            "Eli", "Eri", "Fran", "Gem", "Ger", "Gi", "Gil", "Gle", "Gra", "Gwen",
-            "Hai", "Hay", "Hel", "Hil", "Ir", "Isa", "Ja", "Jan", "Jen", "Jes",
-            "Jo", "Jul", "Ka", "Kar", "Kat", "Kath", "Ker", "Kim", "La", "Lager",
-            "Le", "Lea", "Lee", "Lin", "Lis", "Liz", "Lu", "Ma", "Mad", "Mag",
-            "Mar", "Mau", "Max", "Meg", "Mel", "Mi", "Mia", "Mil", "Mir", "Mo",
-            "Na", "Nata", "Ne", "Pa", "Pho", "Ra", "Ro", "Ros", "Sam", "San",
-            "Si", "Sie", "Sig", "Sta", "Stel", "Su", "Tam", "Tan", "Te", "Ti",
-            "Tra", "Tri", "Ur", "Val", "Ver", "Vir", "Wen", "Wil", "Zel"
-        };
-
-        String[] fcs = {    // female constructed suffix
-            "a", "alla", "an", "anda", "anna", "anne", "ayne", "be", "bel",
-            "bella", "belle", "berta", "beth", "bie", "by", "ca", "cee", "cella",
-            "chel", "chell", "chelle", "cia", "cie", "cine", "cy", "da", "di",
-            "dia", "die", "dine", "dolin", "dra", "drien", "e", "edith", "ee",
-            "ela", "ella", "elle", "elyn", "emma", "ena", "ene", "enna", "erta",
-            "et", "ette", "gee", "gela", "gie", "grid", "gy", "i", "iana", "ica",
-            "icca", "ice", "ie", "iel", "iella", "igh", "in", "ina", "ine",
-            "inne", "is", "isa", "ise", "issa", "jorie", "ke", "la", "lee",
-            "lenna", "lian", "liana", "lie", "lin", "lina", "line", "linne",
-            "lla", "llian", "lotte", "ly", "lyn", "ma", "mie", "mma", "my", "na",
-            "na", "nda", "ne", "nica", "nie", "nna", "nne", "ny", "otte", "phe",
-            "phia", "phie", "ra", "re", "ree", "righ", "rina", "rine", "ris",
-            "rix", "rude", "ry", "rys", "sa", "san", "sei", "selle", "sha", "sie",
-            "sy", "t", "ta", "te", "tha", "this", "thy", "ti", "tina", "tine",
-            "trice", "trid", "tris", "trix", "trude", "tte", "ty", "uki", "ula",
-            "una", "vie", "vy", "xie", "xy", "y", "ya", "yin", "yn", "yne", "ys",
-            "zie", "zy"
-        };
-
-        String[] fpr = {    // female proper name
-            "Alice", "Barbara", "Bonnie", "Brooke", "Carol", "Dottie", "Dotty",
+    static String[] fpr = {    // female proper name
+        "Alice", "Barbara", "Bonnie", "Brooke", "Carol", "Dottie", "Dotty",
             "Eileen", "Ellen", "Heidi", "Jane", "Jean", "Jeaneane", "Jeanette",
             "Joan", "Judith", "Karen", "Leah", "Leia", "Lisa", "Lola", "Margaret",
             "Maya", "Megan", "Mila", "Nancy", "Nicole", "Nina", "Olivia", "Peggy",
             "Phoebe", "Piper", "Sally", "Samantha", "Sara", "Sarah", "Serena",
             "Shannon", "Stephanie", "Summer", "Svetlana", "Tamara", "Tati",
             "Tatyana", "Valentina"
-        };
+    };
 
-        String[] mcp = {    // male constructed prefix
-            "Ad", "Al", "Ald", "An", "Bar", "Bart", "Bil", "Billy-Bob", "Bob",
-            "Bur", "Cal", "Cam", "Chad", "Cor", "Dan", "Der", "Des", "Dil", "Do",
-            "Don", "Dood", "Dud", "Dun", "Ed", "El", "En", "Er", "Fer", "Fred",
-            "Gene", "Geof", "Gil", "Greg", "Gus", "Had", "Hal", "Han", "Har",
-            "Hen", "Her", "Hud", "Jed", "Jen", "Jer", "Joe", "John", "Jon", "Jor",
-            "Kel", "Ken", "Ker", "Kir", "Lan", "Lem", "Len", "Lo", "Lod", "Lu",
-            "Lud", "Mac", "Mal", "Mat", "Mel", "Mer", "Mil", "Mit", "Mun", "Ned",
-            "Neil", "Nel", "New", "Ob", "Or", "Pat", "Phil", "Ray", "Rib", "Rich",
-            "Ro", "Rod", "Ron", "Sam", "Sean", "See", "Shel", "Shep", "Sher",
-            "Sid", "Sig", "Son", "Thom", "Thomp", "Tom", "Wehr", "Wil"
-        };
+    static String[] mcp = {    // male constructed prefix
+        "Ad", "Al", "Ald", "An", "Bar", "Bart", "Bil", "Billy-Bob", "Bob",
+        "Bur", "Cal", "Cam", "Chad", "Cor", "Dan", "Der", "Des", "Dil", "Do",
+        "Don", "Dood", "Dud", "Dun", "Ed", "El", "En", "Er", "Fer", "Fred",
+        "Gene", "Geof", "Gil", "Greg", "Gus", "Had", "Hal", "Han", "Har",
+        "Hen", "Her", "Hud", "Jed", "Jen", "Jer", "Joe", "John", "Jon", "Jor",
+        "Kel", "Ken", "Ker", "Kir", "Lan", "Lem", "Len", "Lo", "Lod", "Lu",
+        "Lud", "Mac", "Mal", "Mat", "Mel", "Mer", "Mil", "Mit", "Mun", "Ned",
+        "Neil", "Nel", "New", "Ob", "Or", "Pat", "Phil", "Ray", "Rib", "Rich",
+        "Ro", "Rod", "Ron", "Sam", "Sean", "See", "Shel", "Shep", "Sher",
+        "Sid", "Sig", "Son", "Thom", "Thomp", "Tom", "Wehr", "Wil"
+    };
 
-        String[] mcs = {    // male constructed suffix
-            "ald", "bal", "bald", "bart", "bas", "berry", "bert", "bin", "ble",
-            "bles", "bo", "bree", "brett", "bro", "bur", "burry", "bus", "by",
-            "cal", "can", "cas", "cott", "dan", "das", "den", "din", "do", "don",
-            "dorf", "dos", "dous", "dred", "drin", "dun", "ely", "emone", "emy",
-            "eny", "fal", "fel", "fen", "field", "ford", "fred", "frey", "frey",
-            "frid", "frod", "fry", "furt", "gan", "gard", "gas", "gee", "gel",
-            "ger", "gun", "hat", "ing", "ke", "kin", "lan", "las", "ler", "ley",
-            "lie", "lin", "lin", "lo", "lock", "long", "lorf", "ly", "mal", "man",
-            "min", "ming", "mon", "more", "mund", "my", "nand", "nard", "ner",
-            "ney", "nie", "ny", "oly", "ory", "rey", "rick", "rie", "righ", "rim",
-            "rod", "ry", "sby", "sel", "sen", "sey", "ski", "son", "sted", "ster",
-            "sy", "ton", "top", "trey", "van", "vey", "vin", "vis", "well", "wig",
-            "win", "wise", "zer", "zon", "zor"
-        };
+    static String[] mcs = {    // male constructed suffix
+        "ald", "bal", "bald", "bart", "bas", "berry", "bert", "bin", "ble",
+        "bles", "bo", "bree", "brett", "bro", "bur", "burry", "bus", "by",
+        "cal", "can", "cas", "cott", "dan", "das", "den", "din", "do", "don",
+        "dorf", "dos", "dous", "dred", "drin", "dun", "ely", "emone", "emy",
+        "eny", "fal", "fel", "fen", "field", "ford", "fred", "frey", "frey",
+        "frid", "frod", "fry", "furt", "gan", "gard", "gas", "gee", "gel",
+        "ger", "gun", "hat", "ing", "ke", "kin", "lan", "las", "ler", "ley",
+        "lie", "lin", "lin", "lo", "lock", "long", "lorf", "ly", "mal", "man",
+        "min", "ming", "mon", "more", "mund", "my", "nand", "nard", "ner",
+        "ney", "nie", "ny", "oly", "ory", "rey", "rick", "rie", "righ", "rim",
+        "rod", "ry", "sby", "sel", "sen", "sey", "ski", "son", "sted", "ster",
+        "sy", "ton", "top", "trey", "van", "vey", "vin", "vis", "well", "wig",
+        "win", "wise", "zer", "zon", "zor"
+    };
 
-        String[] mpr = {    // male proper name
-            "Adam", "Al", "Alan", "Archibald", "Buzz", "Carson", "Chad", "Charlie",
-            "Chris", "Chuck", "Dean", "Ed", "Edan", "Edlu", "Frank", "Franklin",
-            "Gus", "Hans", "Jack", "James", "Jim", "Kirk", "Kurt", "Lars", "Luke",
-            "Mac", "Matt", "Phil", "Randall", "Scott", "Scott", "Sean", "Steve",
-            "Tom", "Will"
-        };
+    static String[] mpr = {    // male proper name
+        "Adam", "Al", "Alan", "Archibald", "Buzz", "Carson", "Chad", "Charlie",
+        "Chris", "Chuck", "Dean", "Ed", "Edan", "Edlu", "Frank", "Franklin",
+        "Gus", "Hans", "Jack", "James", "Jim", "Kirk", "Kurt", "Lars", "Luke",
+        "Mac", "Matt", "Phil", "Randall", "Scott", "Scott", "Sean", "Steve",
+        "Tom", "Will"
+    };
+
+    static void main(String[] args) throws InterruptedException {
 
         // variable definitions
 
@@ -121,6 +121,7 @@ public class nameGen {
 
         // mostly user input here
 
+       surname: //Select surname type
         System.out.println("Specify type of names to generate.");
         System.out.println("Type 'f' for Future-style names, and 's' for standard names.");
         System.out.println("Type 'help' for help, or type 'exit' to exit.");
@@ -130,20 +131,20 @@ public class nameGen {
                             Thread.sleep(2000);
                             System.exit(0);
                             break;
-            case "help":    helpPage.main(args);
+            case "help":    helpPage.main();
+                            goto surname;
                             break;
             case "f":       nameGenParams = "f";
                             break;
             case "s":       nameGenParams = "s";
                             break;
             default:        System.out.println("Specified type is not valid.");
-                            nameGen.main(args);
+                            goto surname;
                             break;
         }
 
-        if ("f".equals(nameGenParams)) { // if the selected type is Future
-          // do nothing
-        } else { // else; more selection
+       firstName: //Select type of first name--if it's Future-style, don't ask.
+        if (!"f".equals(nameGenParams)) { // if the selected type is Future
           System.out.println("Specify if you want to generate:"
                   + "\na combination of both constructed and proper names (type [r]),"
                   + "\nconstructed names only (type [c])"
@@ -155,7 +156,8 @@ public class nameGen {
                               Thread.sleep(2000);
                               System.exit(0);
                               break;
-              case "help":    helpPage.main(args);
+              case "help":    helpPage.main();
+                              goto firstName;
                               break;
               case "r":       nameGenParams = "sr";
               case "c":       nameGenParams = "sc";
@@ -163,6 +165,7 @@ public class nameGen {
             }
         }
 
+       gender: //Select gender
         System.out.println("Specify gender for generated names.");
         System.out.println("Type 'f' for female, and 'm' for male.");
         String inputStr3 = scanner.nextLine().toLowerCase();
@@ -188,22 +191,23 @@ public class nameGen {
                             }
                             break;
             default:        System.out.println("Specified gender is not valid.");
-                            nameGen.main(args);
+                            goto gender;
                             break;
         }
 
+       number: //Select number of names
         System.out.println("Specify number of names to generate.");
         int inputInt = 0;
         try {
             inputInt = scanner.nextInt();
         } catch (InputMismatchException e) {
             System.out.println("A number was not specified.");
-            nameGen.main(args);
+            goto number;
         }
         if (inputInt <= 0) {
             System.out.println("A negative number / zero was specified.");
             System.out.println("Please specify a nonzero, nonnegative number.");
-            nameGen.main(args);
+            goto number(args);
         }
 
         // namegen code starts here
@@ -268,7 +272,7 @@ public class nameGen {
                             }
                             break;
             default:        System.out.println("Specified type is not valid.");
-                            nameGen.main(args);
+                            return;
                             break;
 
         }
