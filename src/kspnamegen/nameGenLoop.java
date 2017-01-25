@@ -26,22 +26,24 @@ import java.util.Scanner;
 
 public class nameGenLoop {
 
-    static void main(String[] args) throws InterruptedException {
+    static void main() throws InterruptedException {
+        nameGen();
         System.out.println("Would you like to generate more names? (Y/N)");
         Scanner scanner = new Scanner(System.in);
         String yn = scanner.nextLine().toLowerCase();
-        switch (yn) {
+        for(;;) {
+            switch (yn) {
 
-            case "y": nameGen.main(args);
-                      break;
-            case "n": System.out.println("Exiting...");
-                      Thread.sleep(2000);
-                      System.exit(0);
-                      break;
-            default:  System.out.println("Invalid selection.");
-                      nameGenLoop.main(args);
-                      break;
-                      
+                case "y": nameGen.main();
+                          break;
+                case "n": System.out.println("Exiting...");
+                          Thread.sleep(2000);
+                          System.exit(0);
+                          break;
+                default:  System.out.println("Invalid selection.");
+                          break;
+
+            }
         }
     }
     
