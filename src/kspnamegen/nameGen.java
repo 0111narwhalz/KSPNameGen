@@ -8,10 +8,10 @@
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -29,8 +29,9 @@ import java.util.Scanner;
 public class nameGen {
 
     static void main(String[] args) throws InterruptedException {
-        
+
         // array defs
+
         String[] fcp = {    // female constructed prefix
             "Aga", "Al", "An", "Ar", "As", "Bar", "Bea", "Ber", "Car", "Cat",
             "Cer", "Clau", "Cris", "Da", "Dan", "Daph", "De", "Deb", "Di", "Eil",
@@ -43,6 +44,7 @@ public class nameGen {
             "Si", "Sie", "Sig", "Sta", "Stel", "Su", "Tam", "Tan", "Te", "Ti",
             "Tra", "Tri", "Ur", "Val", "Ver", "Vir", "Wen", "Wil", "Zel"
         };
+
         String[] fcs = {    // female constructed suffix
             "a", "alla", "an", "anda", "anna", "anne", "ayne", "be", "bel",
             "bella", "belle", "berta", "beth", "bie", "by", "ca", "cee", "cella",
@@ -62,6 +64,7 @@ public class nameGen {
             "una", "vie", "vy", "xie", "xy", "y", "ya", "yin", "yn", "yne", "ys",
             "zie", "zy"
         };
+
         String[] fpr = {    // female proper name
             "Alice", "Barbara", "Bonnie", "Brooke", "Carol", "Dottie", "Dotty",
             "Eileen", "Ellen", "Heidi", "Jane", "Jean", "Jeaneane", "Jeanette",
@@ -71,6 +74,7 @@ public class nameGen {
             "Shannon", "Stephanie", "Summer", "Svetlana", "Tamara", "Tati",
             "Tatyana", "Valentina"
         };
+
         String[] mcp = {    // male constructed prefix
             "Ad", "Al", "Ald", "An", "Bar", "Bart", "Bil", "Billy-Bob", "Bob",
             "Bur", "Cal", "Cam", "Chad", "Cor", "Dan", "Der", "Des", "Dil", "Do",
@@ -83,6 +87,7 @@ public class nameGen {
             "Ro", "Rod", "Ron", "Sam", "Sean", "See", "Shel", "Shep", "Sher",
             "Sid", "Sig", "Son", "Thom", "Thomp", "Tom", "Wehr", "Wil"
         };
+
         String[] mcs = {    // male constructed suffix
             "ald", "bal", "bald", "bart", "bas", "berry", "bert", "bin", "ble",
             "bles", "bo", "bree", "brett", "bro", "bur", "burry", "bus", "by",
@@ -98,6 +103,7 @@ public class nameGen {
             "sy", "ton", "top", "trey", "van", "vey", "vin", "vis", "well", "wig",
             "win", "wise", "zer", "zon", "zor"
         };
+
         String[] mpr = {    // male proper name
             "Adam", "Al", "Alan", "Archibald", "Buzz", "Carson", "Chad", "Charlie",
             "Chris", "Chuck", "Dean", "Ed", "Edan", "Edlu", "Frank", "Franklin",
@@ -105,12 +111,17 @@ public class nameGen {
             "Mac", "Matt", "Phil", "Randall", "Scott", "Scott", "Sean", "Steve",
             "Tom", "Will"
         };
-        // application logic
-        Random random = new Random();
-        Scanner scanner = new Scanner(System.in);
-        boolean bool = random.nextInt(20)==0;
-        String nameGenParams = null;
-        System.out.println("Specify types of name to generate.");
+
+        // variable definitions
+
+        Random random = new Random(); // used for namegen and probability
+        Scanner scanner = new Scanner(System.in); // should be obvious
+        boolean bool = random.nextInt(20)==0; // used for probability
+        String nameGenParams = null; // just an init to stop NB from freaking out
+
+        // mostly user input here
+
+        System.out.println("Specify type of names to generate.");
         System.out.println("Type 'f' for Future-style names, and 's' for standard names.");
         System.out.println("Type 'help' for help, or type 'exit' to exit.");
         String inputStr = scanner.nextLine().toLowerCase();
@@ -129,29 +140,29 @@ public class nameGen {
                             nameGen.main(args);
                             break;
         }
-        System.out.println("Specify if you want to generate:"
-                + "\na combination of both constructed and proper names (type [r]),"
-                + "\nconstructed names only (type [c])"
-                + "\nor proper names only [p].");
-        System.out.println("Note: this option does not apply to Future-style names."
-                + "\nIf you are planning to generate Future-style names, simply hit return.");
-        System.out.println("Type 'help' for help, or type 'exit' to exit.");
-        String inputStr2 = scanner.nextLine().toLowerCase();
-        if ("f".equals(nameGenParams)) {
-            inputStr2 = "";
+
+        if ("f".equals(nameGenParams)) { // if the selected type is Future
+          break; // then just skip this
+        } else { // else; more selection
+          System.out.println("Specify if you want to generate:"
+                  + "\na combination of both constructed and proper names (type [r]),"
+                  + "\nconstructed names only (type [c])"
+                  + "\nor proper names only [p].");
+          System.out.println("Type 'help' for help, or type 'exit' to exit.");
+          String inputStr2 = scanner.nextLine().toLowerCase();
+          switch (inputStr2) {
+              case "exit":    System.out.println("Exiting...");
+                              Thread.sleep(2000);
+                              System.exit(0);
+                              break;
+              case "help":    helpPage.main(args);
+                              break;
+              case "r":       nameGenParams = "sr";
+              case "c":       nameGenParams = "sc";
+              case "p":       nameGenParams = "sp";
+            }
         }
-        switch (inputStr2) {
-            case "exit":    System.out.println("Exiting...");
-                            Thread.sleep(2000);
-                            System.exit(0);
-                            break;
-            case "help":    helpPage.main(args);
-                            break;
-            case "":        break;
-            case "r":       nameGenParams = "sr";
-            case "c":       nameGenParams = "sc";
-            case "p":       nameGenParams = "sp";
-        }
+
         System.out.println("Specify gender for generated names.");
         System.out.println("Type 'f' for female, and 'm' for male.");
         String inputStr3 = scanner.nextLine().toLowerCase();
@@ -180,6 +191,7 @@ public class nameGen {
                             nameGen.main(args);
                             break;
         }
+
         System.out.println("Specify number of names to generate.");
         int inputInt = 0;
         try {
@@ -193,61 +205,74 @@ public class nameGen {
             System.out.println("Please specify a nonzero, nonnegative number.");
             nameGen.main(args);
         }
+
+        // namegen code starts here
+
         switch (nameGenParams) {
-            case "ff":      for (int i=0; i<inputInt; i++) {
+            case "ff":      for (int i=0; i<inputInt; i++) { // loops for inputInt times
                                 System.out.println(fpr[random.nextInt(fpr.length)] + " " + fcp[random.nextInt(fcp.length)] + fcs[random.nextInt(fcs.length)]);
+                                // female proper name + space + female constructed prefix + female constructed suffix
                             }
                             System.out.println("Name generation successful.");
                             nameGenLoop.main(args);
                             break;
-            case "fm":      for (int i=0; i<inputInt; i++) {
+            case "fm":      for (int i=0; i<inputInt; i++) { // loops for inputInt times
                                 System.out.println(mpr[random.nextInt(mpr.length)] + " " + mcp[random.nextInt(mcp.length)] + mcs[random.nextInt(mcs.length)]);
+                                // female proper name + space + female constructed prefix + female constructed suffix
                             }
                             System.out.println("Name generation successful.");
                             nameGenLoop.main(args);
                             break;
-            case "srf":     for (int i=0; i<inputInt; i++) {
-                                if (bool) {
+            case "srf":     for (int i=0; i<inputInt; i++) { // loops for inputInt times
+                                if (bool) { // if bool is true (1/20 chance)
                                     System.out.println(fpr[random.nextInt(fpr.length)] + " Kerman");
-                                } else {
+                                    // female proper name + Kerman
+                                } else { // else
                                     System.out.println(fcp[random.nextInt(fcp.length)] + fcs[random.nextInt(fcs.length)] + " Kerman");
+                                    // female constructed prefix + female constructed suffix + Kerman
                                 }
                             }
                             System.out.println("Name generation successful.");
                             nameGenLoop.main(args);
                             break;
-            case "srm":     for (int i=0; i<inputInt; i++) {
-                                if (bool) {
+            case "srm":     for (int i=0; i<inputInt; i++) { // loops for inputInt times
+                                if (bool) { // if bool is true (1/20 chance)
                                     System.out.println(mpr[random.nextInt(mpr.length)] + " Kerman");
-                                } else {
+                                    // male proper name + Kerman
+                                } else { // else
                                     System.out.println(mcp[random.nextInt(mcp.length)] + mcs[random.nextInt(mcs.length)] + " Kerman");
+                                    // male constructed prefix + male constructed suffix + Kerman
                                 }
                             }
                             System.out.println("Name generation successful.");
                             nameGenLoop.main(args);
                             break;
-            case "scf":     for (int i=0; i<inputInt; i++) {
+            case "scf":     for (int i=0; i<inputInt; i++) { // loops for inputInt times
+                            System.out.println(fcp[random.nextInt(fcp.length)] + fcs[random.nextInt(fcs.length)] + " Kerman");
+                            // female constructed prefix + female constructed suffix + Kerman
+                            }
+                            break;
+            case "scm":     for (int i=0; i<inputInt; i++) { // loops for inputInt times
+                            System.out.println(mcp[random.nextInt(mcp.length)] + mcs[random.nextInt(mcs.length)] + " Kerman");
+                            // male constructed prefix + male constructed suffix + Kerman
+                            }
+                            break;
+            case "spf":     for (int i=0; i<inputInt; i++) { // loops for inputInt times
                             System.out.println(fpr[random.nextInt(fpr.length)] + " Kerman");
+                            // female proper name + Kerman
                             }
                             break;
-            case "scm":     for (int i=0; i<inputInt; i++) {
-                            System.out.println(mcp[random.nextInt(fcp.length)] + mcs[random.nextInt(fcs.length)] + " Kerman");
-                            }
-                            break;
-            case "spf":     for (int i=0; i<inputInt; i++) {
-                            System.out.println(fpr[random.nextInt(fpr.length)] + " Kerman");
-                            }
-                            break;
-            case "spm":     for (int i=0; i<inputInt; i++) {
+            case "spm":     for (int i=0; i<inputInt; i++) { // loops for inputInt times
                             System.out.println(mpr[random.nextInt(mpr.length)] + " Kerman");
+                            // male proper name + Kerman
                             }
                             break;
             default:        System.out.println("Specified type is not valid.");
                             nameGen.main(args);
                             break;
-                            
+
         }
-        
+
     }
-    
+
 }
