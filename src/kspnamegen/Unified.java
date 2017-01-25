@@ -104,7 +104,7 @@ class Unified
     };
     
     static enum index {
-        TYPE, CMBO, GNDR
+        TYPE, CMBO, GNDR, NMBR
     }
     static String[] prompts = { // cache all the prompts
         /*TYPE*/"Specify types of names to generate.\n" +
@@ -114,13 +114,14 @@ class Unified
                 " c: constructed names only\n" +
                 " p: proper names only",
         /*GNDR*/"Specify gender of generated names.\n" +
-                "'m' for male, 'f' for female"
+                "'m' for male, 'f' for female",
+        /*NMBR*/"Specify count of names to generate."
     };
         
     
     //Other static var defs
     static Scanner scan = new Scanner(System.in);
-    static Random rand = new Random();
+    static Random random = new Random();
     
     static void Loop()
     {
@@ -132,7 +133,7 @@ class Unified
             {
                 nameGen();
             }
-            input = Prompt("Would you like to generate more names? Y/N", false);
+            input = PromptS("Would you like to generate more names? Y/N", false);
             switch(input)
             {
                 case "y":
@@ -165,30 +166,93 @@ class Unified
         nameGen("TYPE");
     }
     
-    static void nameGen(String inpar)
+    static void nameGen(String inpar, String param)
     {
         String input;
-        String param;
-        boolean toggle;
+        int inint;
         
-        input = Prompt(prompt[index.TYPE]);
-        switch(input)
+        switch(inpar)
         {
-            case exit:
-                Kill();
+            case "TYPE":
+                input = PromptS(prompt[index.TYPE]);
+                switch(input)
+                {
+                    case exit:
+                        Kill();
+                        break;
+                    case f:
+                        param = "f";
+                        inpar = "GNDR";
+                        break;
+                    case s:
+                        param = "s";
+                        inpar = "CMBO";
+                        break;
+                    default:
+                        System.out.println("Invalid Input");
+                        break;
+                }
+                nameGen(inpar, param);
                 break;
-            case f:
-                param = "f";
-                inpar = "CMBO";
-                break;
-            case s:
-                param = "s";
-                inpar = "CMBO";
-                break;
-            default
+            case "CMBO":
+                input = PromptS(prompt[index.CMBO]);
+                switch(input)
+                {
+                    case exit:
+                        Kill();
+                        break;
+                    case r:
+                        param += r;
+                        inpar = "GNDR";
+                        break;
+                    case c:
+                        param += c;
+                        inpar = "GNDR";
+                        break;
+                    case p:
+                        param += p;
+                        inpar = "GNDR";
+                        break;
+                    default:
+                        System.out.println("Invalid Input");
+                        break;
+                }
+            case "GNDR":
+                input = PromptS(prompt[index.GNDR]);
+                switch(input)
+                {
+                    case "f":
+                        param += "f";
+                        inpar = "NMBR";
+                        break;
+                    case "m":
+                        param += "m";
+                        inpar = "NMBR";
+                        break;
+                    default:
+                        System.out.println("Invalid Input");
+                        break;
+                }
+            case "NMBR":
+                inint = PromptI(prompt[index.NMBR]);
+                if(inint < 0)
+                {
+                    System.out.println("Number was less than zero.");
+                    nameGen(inpar, param);
+                    return;
+                }
+                for(int i = 0; i < inint; i++)
+                {
+                    Generate(param);
+                }
+                inpar = "CMPT";
+            case "CMPT":
+                return;
+        }
+        nameGen(inpar, param);
     }
     
-    static String Prompt(String query, boolean help)
+    static String PromptS(String query, boolean help)
     {
         System.out.println(query);
         if(help)
@@ -197,3 +261,59 @@ class Unified
         }
         return scan.nextLine().toLowerCase();
     }
+    
+    static int PromptI(String query)
+    {
+        int inputInt = 0;
+        System.out.println(query);
+        try {
+            inputInt = scanner.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("A number was not specified.");
+            inputInt = PromptI(query);
+        }
+        return inputInt;
+    }
+    
+    static void Generate(String param)
+    {
+        boolean toggle = random.nextInt(20) == 0;
+        switch(param)
+        {
+            case "ff":
+                System.out.println(fpr[random.nextInt(fpr.length)] + " " + fcp[random.nextInt(fcp.length)] + fcs[random.nextInt(fcs.length)]);
+                break;
+            case "fm":
+                System.out.println(mpr[random.nextInt(mpr.length)] + " " + mcp[random.nextInt(mcp.length)] + mcs[random.nextInt(mcs.length)]);
+                break;
+            case "srf":
+                if (bool) {
+                    System.out.println(fpr[random.nextInt(fpr.length)] + " Kerman");
+                } else {
+                    System.out.println(fcp[random.nextInt(fcp.length)] + fcs[random.nextInt(fcs.length)] + " Kerman");
+                }
+                break;
+            case "srm":
+                if (bool) {
+                    System.out.println(mpr[random.nextInt(mpr.length)] + " Kerman");
+                } else {
+                    System.out.println(mcp[random.nextInt(mcp.length)] + mcs[random.nextInt(mcs.length)] + " Kerman");
+                }
+                break;
+            case "scf":
+                System.out.println(fpr[random.nextInt(fpr.length)] + " Kerman");
+                break;
+            case "scm":
+                System.out.println(mcp[random.nextInt(fcp.length)] + mcs[random.nextInt(fcs.length)] + " Kerman");
+                break;
+            case "spf":
+                System.out.println(fpr[random.nextInt(fpr.length)] + " Kerman");
+                break;
+            case "spm":
+                System.out.println(mpr[random.nextInt(mpr.length)] + " Kerman");
+                break;
+            default:
+                System.out.println("Specified type is invalid.")
+        }
+    }
+}
